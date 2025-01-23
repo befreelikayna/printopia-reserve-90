@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Printer3d } from "lucide-react";
+import { ArrowRight, Printer } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export function Hero() {
@@ -9,7 +9,7 @@ export function Hero() {
     <div className="relative isolate overflow-hidden bg-gradient-to-b from-primary/20 pt-14">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <Printer3d className="mx-auto h-16 w-16 text-primary mb-8" />
+          <Printer className="mx-auto h-16 w-16 text-primary mb-8" />
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
             Professional 3D Printing Services
           </h1>
