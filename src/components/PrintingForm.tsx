@@ -19,10 +19,15 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Upload, Loader2 } from "lucide-react";
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@/components/ui/radio-group";
 
 export function PrintingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [printType, setPrintType] = useState("fdm");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,6 +53,24 @@ export function PrintingForm() {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
+            <Label>Printing Technology</Label>
+            <RadioGroup
+              defaultValue="fdm"
+              onValueChange={(value) => setPrintType(value)}
+              className="flex flex-col space-y-1"
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="fdm" id="fdm" />
+                <Label htmlFor="fdm">FDM (Fused Deposition Modeling)</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="sla" id="sla" />
+                <Label htmlFor="sla">SLA (Stereolithography)</Label>
+              </div>
+            </RadioGroup>
+          </div>
+
+          <div className="space-y-2">
             <Label htmlFor="file">Upload 3D Model (STL, OBJ, or FBX)</Label>
             <Input
               id="file"
@@ -58,35 +81,68 @@ export function PrintingForm() {
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="material">Material</Label>
-            <Select required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select material" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="pla">PLA</SelectItem>
-                <SelectItem value="abs">ABS</SelectItem>
-                <SelectItem value="petg">PETG</SelectItem>
-                <SelectItem value="resin">Resin</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          {printType === "fdm" ? (
+            <>
+              <div className="space-y-2">
+                <Label htmlFor="material">Material</Label>
+                <Select required>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select material" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="pla">PLA</SelectItem>
+                    <SelectItem value="abs">ABS</SelectItem>
+                    <SelectItem value="petg">PETG</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="quality">Print Quality</Label>
-            <Select required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select quality" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="draft">Draft (0.3mm)</SelectItem>
-                <SelectItem value="standard">Standard (0.2mm)</SelectItem>
-                <SelectItem value="high">High (0.1mm)</SelectItem>
-                <SelectItem value="ultra">Ultra (0.05mm)</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+              <div className="space-y-2">
+                <Label htmlFor="quality">Print Quality</Label>
+                <Select required>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select quality" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="draft">Draft (0.3mm)</SelectItem>
+                    <SelectItem value="standard">Standard (0.2mm)</SelectItem>
+                    <SelectItem value="high">High (0.1mm)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="space-y-2">
+                <Label htmlFor="resin-type">Resin Type</Label>
+                <Select required>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select resin type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="standard">Standard Resin</SelectItem>
+                    <SelectItem value="tough">Tough Resin</SelectItem>
+                    <SelectItem value="clear">Clear Resin</SelectItem>
+                    <SelectItem value="dental">Dental Resin</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="layer-height">Layer Height</Label>
+                <Select required>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select layer height" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="100">100 microns</SelectItem>
+                    <SelectItem value="50">50 microns</SelectItem>
+                    <SelectItem value="25">25 microns</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </>
+          )}
 
           <div className="space-y-2">
             <Label htmlFor="instructions">Special Instructions</Label>
