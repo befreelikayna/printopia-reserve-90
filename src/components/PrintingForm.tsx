@@ -59,13 +59,13 @@ export function PrintingForm() {
               onValueChange={(value) => setPrintType(value)}
               className="grid grid-cols-1 md:grid-cols-2 gap-4"
             >
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-accent">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-accent transition-colors duration-200">
                 <RadioGroupItem value="fdm" id="fdm" />
                 <Label htmlFor="fdm" className="flex-1 cursor-pointer">
                   FDM (Fused Deposition Modeling)
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-accent">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-accent transition-colors duration-200">
                 <RadioGroupItem value="sla" id="sla" />
                 <Label htmlFor="sla" className="flex-1 cursor-pointer">
                   SLA (Stereolithography)
@@ -82,7 +82,7 @@ export function PrintingForm() {
               accept=".stl,.obj,.fbx"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
               required
-              className="file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+              className="file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 transition-colors duration-200"
             />
           </div>
 
@@ -158,7 +158,7 @@ export function PrintingForm() {
             />
           </div>
 
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+          <Button type="submit" className="w-full hover:bg-primary/90 transition-colors duration-200" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

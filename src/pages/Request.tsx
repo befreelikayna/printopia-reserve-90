@@ -13,7 +13,7 @@ const Request = () => {
           <Button
             variant="ghost"
             onClick={() => navigate(-1)}
-            className="mb-4"
+            className="mb-4 hover:bg-secondary transition-colors duration-200"
           >
             <ChevronLeft className="mr-2" />
             Back
