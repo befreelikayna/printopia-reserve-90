@@ -44,28 +44,32 @@ export function PrintingForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Card>
-        <CardHeader>
-          <CardTitle>New Print Request</CardTitle>
+      <Card className="shadow-lg">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-xl md:text-2xl">New Print Request</CardTitle>
           <CardDescription>
             Fill out the details for your 3D printing project
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-4 md:space-y-6">
           <div className="space-y-2">
             <Label>Printing Technology</Label>
             <RadioGroup
               defaultValue="fdm"
               onValueChange={(value) => setPrintType(value)}
-              className="flex flex-col space-y-1"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4"
             >
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-accent">
                 <RadioGroupItem value="fdm" id="fdm" />
-                <Label htmlFor="fdm">FDM (Fused Deposition Modeling)</Label>
+                <Label htmlFor="fdm" className="flex-1 cursor-pointer">
+                  FDM (Fused Deposition Modeling)
+                </Label>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-accent">
                 <RadioGroupItem value="sla" id="sla" />
-                <Label htmlFor="sla">SLA (Stereolithography)</Label>
+                <Label htmlFor="sla" className="flex-1 cursor-pointer">
+                  SLA (Stereolithography)
+                </Label>
               </div>
             </RadioGroup>
           </div>
@@ -78,11 +82,12 @@ export function PrintingForm() {
               accept=".stl,.obj,.fbx"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
               required
+              className="file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
             />
           </div>
 
           {printType === "fdm" ? (
-            <>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="material">Material</Label>
                 <Select required>
@@ -110,9 +115,9 @@ export function PrintingForm() {
                   </SelectContent>
                 </Select>
               </div>
-            </>
+            </div>
           ) : (
-            <>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="resin-type">Resin Type</Label>
                 <Select required>
@@ -141,7 +146,7 @@ export function PrintingForm() {
                   </SelectContent>
                 </Select>
               </div>
-            </>
+            </div>
           )}
 
           <div className="space-y-2">
